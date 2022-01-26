@@ -5,8 +5,8 @@ function TaskList({ tasks }) {
 
   const [taskList, setTaskList] = useState(tasks)
   
-  function handleRemove(text){
-    const newList = taskList.filter((task) => task.text !== text);
+  function handleRemove(event){
+    const newList = taskList.filter((task) => task.text !== event.target.dataset.task);
 
     setTaskList(newList);
   }
