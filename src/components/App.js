@@ -6,39 +6,38 @@ import { CATEGORIES, TASKS } from "../data";
 
 // console.log("Here's the data you're working with");
 // console.log({ CATEGORIES, TASKS });
-console.log(CATEGORIES)
+
 
 function App() {
   const [filterList, setFilterList] = useState(TASKS)
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selected, setSelected] = useState(false)
+  // const [classSelected, setclassSelected] = useState(false)
 
- function changeClass(){
-   setSelected((selected) => !selected)
- }
   
- function handleFilterChange(event) {
-  setSelectedCategory(event.target.textContent);
-  console.log(selectedCategory)
-  changeClass()
-  setFilter()
-  debugger
- }
-  
- function setFilter(){
-    if (selectedCategory === "All") {
-      return true
-    }
-    setFilterList(filterList.filter((task)=> task.category === selectedCategory))
- }
-  
+  function handleRemove(event){
+     const newList = filterList.filter((task) => task.text !== event.target.dataset.task);
+     setFilterList(newList)
+  }
+
+  function handleFilterChange(event) {
+    setSelectedCategory(event.target.textContent);
+  }
+
+const tasksToDisplay = filterList.filter(
+  (task)=> selectedCategory === "All" || task.category === selectedCategory
+)
+
+function onTaskFormSubmit (newTask) {
+  setFilterList((filterList) => [...filterList, newTask])
+}
+
 
   return (
     <div className="App">
       <h2>My tasks</h2>
-      <CategoryFilter categories={CATEGORIES} filter={handleFilterChange} className={selected}/>
-      <NewTaskForm />
-      <TaskList tasks={filterList} />
+      <CategoryFilter categories={CATEGORIES} filter={handleFilterChange} selected={selectedCategory} />
+      <NewTaskForm categories={CATEGORIES} onSubmit={onTaskFormSubmit}/>
+      <TaskList tasks={tasksToDisplay} onRemove={handleRemove}/>
     </div>
   );
 }
