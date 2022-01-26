@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function NewTaskForm({ categories, onSubmit }) {
+function NewTaskForm({ categories, onTaskFormSubmit }) {
   const allCategories = categories.filter(category => category !== "All").map(category=> <option key={category} value={category}>{category}</option>)
 
   const [formData, setFormData] = useState({
@@ -21,7 +21,7 @@ function NewTaskForm({ categories, onSubmit }) {
       text: formData.text,
       category: formData.category,
     };
-    onSubmit(newTask)
+    onTaskFormSubmit(newTask)
   }
 
 

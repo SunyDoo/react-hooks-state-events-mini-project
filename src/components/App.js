@@ -36,7 +36,7 @@ function onTaskFormSubmit (newTask) {
     <div className="App">
       <h2>My tasks</h2>
       <CategoryFilter categories={CATEGORIES} filter={handleFilterChange} selected={selectedCategory} />
-      <NewTaskForm categories={CATEGORIES} onSubmit={onTaskFormSubmit}/>
+      <NewTaskForm categories={CATEGORIES} onTaskFormSubmit={onTaskFormSubmit}/>
       <TaskList tasks={tasksToDisplay} onRemove={handleRemove}/>
     </div>
   );
