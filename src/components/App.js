@@ -27,7 +27,7 @@ const tasksToDisplay = filterList.filter(
   (task)=> selectedCategory === "All" || task.category === selectedCategory
 )
 
-function onTaskFormSubmit (newTask) {
+function handleSubmit (newTask) {
   setFilterList((filterList) => [...filterList, newTask])
 }
 
@@ -36,7 +36,7 @@ function onTaskFormSubmit (newTask) {
     <div className="App">
       <h2>My tasks</h2>
       <CategoryFilter categories={CATEGORIES} filter={handleFilterChange} selected={selectedCategory} />
-      <NewTaskForm categories={CATEGORIES} onTaskFormSubmit={onTaskFormSubmit}/>
+      <NewTaskForm categories={CATEGORIES} onTaskFormSubmit={handleSubmit}/>
       <TaskList tasks={tasksToDisplay} onRemove={handleRemove}/>
     </div>
   );
